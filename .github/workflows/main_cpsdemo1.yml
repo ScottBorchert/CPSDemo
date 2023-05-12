@@ -47,7 +47,7 @@ jobs:
           name: angular-app
 
       - name: List contents of angular-app folder
-        run: ls -la ${{ github.workspace }}/cpsdemo-app
+        run: ls -la ${{ github.workspace }}
   
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
