@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Angular app to Azure Web App
+name: Build and deploy Node.js app to Azure Web App - CPSDemo1
 
 on:
   push:
@@ -17,21 +17,21 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Set up Node.js version
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v1
         with:
           node-version: '16.x'
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build Angular app
-        run: npm run build
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+          npm run test --if-present
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: angular-app
-          path: dist
+          name: node-app
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: angular-app
+          name: node-app
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'CPSDemo1'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1BD149CBBD3044F78FDEB521470242AF }}
-          package: ${{ github.workspace }}/dist
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7C085391AC4F4ECB91CABE2604FE1C17 }}
+          package: .
