@@ -53,6 +53,6 @@ jobs:
           app-name: 'CPSDemo1'
           slot-name: 'Production'
           #publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1BD149CBBD3044F78FDEB521470242AF }}
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_b88829e7a4ea444b9933d2bc02ed10bf }}
+          publish-profile: ${{ secrets.AZURE_CPSDEMO1 }}
  
           package: ${{ github.workspace }}/dist
