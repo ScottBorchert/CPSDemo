@@ -14,6 +14,23 @@ steps:
   inputs:
     versionSpec: '$(node_version)'
   displayName: 'Install Node.js'
+# Add Azure login action
+- task: AzureCLI@2
+  displayName: 'Azure Login'
+  inputs:
+    azureSubscription: '<Your-Azure-Subscription-Name>'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az login --service-principal --username "$(CLIENT_ID)" --password "$(CLIENT_SECRET)" --tenant "$(TENANT_ID)"
+
+# Update the webapps-deploy action
+- task: azure/webapps-deploy@v2
+  displayName: 'Deploy to Azure Web App'
+  inputs:
+    app-name: 'CPSDemo1'
+    slot-name: 'Production'
+    package: '/home/runner/work/CPSDemo/CPSDemo/dist'
 
 - script: |
     npm ci
