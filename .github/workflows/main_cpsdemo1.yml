@@ -56,4 +56,4 @@ jobs:
           app-name: 'CPSDemo1'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZURE_CPSDEMO1 }}
-          package: ${{ github.workspace }}/angular-app/dist/cpsdemo-app
+          package: ${{ github.workspace }}
