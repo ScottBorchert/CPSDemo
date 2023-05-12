@@ -46,6 +46,9 @@ jobs:
         with:
           name: angular-app
 
+      - name: List contents of angular-app folder
+        run: ls -la ${{ github.workspace }}/angular-app
+  
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
