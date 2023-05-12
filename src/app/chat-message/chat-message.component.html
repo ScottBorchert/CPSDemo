@@ -1,0 +1,10 @@
+<div class="chat-bubble" [ngClass]="{ 'is-user': isUser }">
+    <ng-container *ngIf="!isUser">
+      <img [src]="avatarUrl" alt="Bot avatar" class="avatar" />
+    </ng-container>
+    <div class="message" [ngClass]="{ 'is-user': isUser }">{{ message }}</div>
+    <ng-container *ngIf="isUser">
+      <img [src]="avatarUrl" alt="User avatar" class="avatar" />
+    </ng-container>
+  </div>
+  
