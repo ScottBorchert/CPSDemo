@@ -1,12 +1,9 @@
-.container {
-    
-  }
-  
-  app-chat-session,
-  app-video-cam {
-    flex: 0 0 auto;
-  }
+.video-chat-container {
+  display: flex;
+  align-items: stretch;
+}
 
-  app-video-cam {
-    width: 500px;
-  }
+.video-cam, .chat-session {
+  flex: 1;
+  margin-right: 20px;
+}

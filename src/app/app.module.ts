@@ -6,18 +6,26 @@ import { ChatSessionComponent } from './chat-session/chat-session.component';
 import { ChatMessageComponent } from './chat-message/chat-message.component';
 import { FormsModule } from '@angular/forms';
 import { VideoCamComponent } from './video-cam/video-cam.component';
+import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatSessionComponent,
     ChatMessageComponent,
-    VideoCamComponent
+    VideoCamComponent,
+    LoginComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

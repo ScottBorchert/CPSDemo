@@ -25,10 +25,19 @@ export class ChatSessionComponent implements OnInit {
     this.userInput = event.target.value;
   }
 
+  scrollToBottom(): void {
+    setTimeout(() => {
+      if (this.messageList) {
+        this.messageList.nativeElement.scrollTop = this.messageList.nativeElement.scrollHeight;
+      }
+    }, 100);
+  }
+
+  
   async handleSendMessage(): Promise<void> {
     const newMessage: ChatMessage = { is_user: true, message: this.userInput };
     this.messages.push(newMessage);
-    
+    this.scrollToBottom();
   
     // Define the endpoint and query string parameters
     const endpoint = 'https://us-central1-gptlab-api.cloudfunctions.net/app';
@@ -55,6 +64,7 @@ export class ChatSessionComponent implements OnInit {
         message: botResponse,
       };
       this.messages.push(botMessage);
+      this.scrollToBottom(); 
     } catch (error) {
       console.error(error);
     }
