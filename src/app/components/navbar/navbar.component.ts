@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from '../user.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,5 +9,8 @@ import { UserService } from '../user.service';
 export class NavbarComponent {
   constructor(public userService: UserService) { }
 
-  
+  logout() {
+    // Call the logout method or perform any necessary logout logic
+    this.userService.logout();
+  }
 }
