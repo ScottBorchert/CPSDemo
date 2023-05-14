@@ -9,7 +9,4 @@ import { UserService } from './services/user.service';
 export class AppComponent {
   constructor(public userService: UserService) { }
   title = 'CPSDemo-App';
-  logout() {
-    this.userService.logout();
-  }
 }

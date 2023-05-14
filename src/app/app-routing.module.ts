@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'admin', canActivate: [AuthGuard], loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule) },
+  { path: 'portal', canActivate: [AuthGuard], loadChildren: () => import('./modules/portal/portal.module').then((m) => m.PortalModule) },
   { path: '**', component: NotFoundComponent}
 ];
 
