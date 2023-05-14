@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
@@ -14,7 +13,6 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    NavbarComponent,
     ForgotPasswordComponent,
     NotFoundComponent
   ],

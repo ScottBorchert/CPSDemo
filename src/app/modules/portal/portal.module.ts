@@ -11,9 +11,9 @@ import { ResumeComponent } from './components/resume/resume.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import { ChatSessionComponent } from './components/chat-session/chat-session.component';
-import { VideoCamComponent } from 'src/app/components/video-cam/video-cam.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { VideoCamComponent } from './components/video-cam/video-cam.component';
 
 
 

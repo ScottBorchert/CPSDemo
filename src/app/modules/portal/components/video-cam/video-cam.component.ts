@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
-  selector: 'app-video-cam',
+  selector: 'app-portal-video-cam',
   templateUrl: './video-cam.component.html',
   styleUrls: ['./video-cam.component.scss']
 })
