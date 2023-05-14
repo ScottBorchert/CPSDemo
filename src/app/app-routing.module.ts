@@ -3,13 +3,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { AppComponent } from './app.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: '/login' } // Catch-all route to redirect to login if the route is not recognized
+  { path: 'forgot-password', component: ForgotPasswordComponent},
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'admin', canActivate: [AuthGuard], loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule) },
+  { path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({
