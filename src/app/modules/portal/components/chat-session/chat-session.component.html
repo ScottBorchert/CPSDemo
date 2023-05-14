@@ -1,23 +1,17 @@
 <div class="container">
-    <div class="alert alert-primary">Conversation with <strong>{{ botName }}</strong></div>
-    <div #messageList class="message-list">
-      <ng-container *ngFor="let message of messages; index as i">
-        <app-chat-message [isUser]="message.is_user" [message]="message.message" [botName]="botName"></app-chat-message>
-      </ng-container>
-    </div>
-    <div class="input-container">
-      <input
-        class="text-input"
-        placeholder="Enter your chat message"
-        type="text"
-        (input)="handleUserChat($event)"
-        [(ngModel)]="userInput"
-      />
-      <button class="btn btn-primary m-2" (click)="handleSendMessage()">Send</button>
-    </div>
-    <div class="button-row">
-      <button class="btn btn-primary m-2" (click)="handleStartNewSession()">New session</button>
-      <button class="btn btn-warning m-2" (click)="handleSessionEnd()">End Session</button>
-    </div>
+  <div class="alert alert-primary">Conversation with <strong>{{ botName }}</strong></div>
+  <div #messageList class="message-list">
+    <ng-container *ngFor="let message of messages; index as i">
+      <app-chat-message [isUser]="message.is_user" [message]="message.message" [botName]="botName"></app-chat-message>
+    </ng-container>
   </div>
-  
+  <div class="input-container">
+    <input class="text-input" placeholder="Enter your chat message" type="text" (input)="handleUserChat($event)"
+      [(ngModel)]="userInput" />
+    <button class="btn btn-primary m-2" (click)="handleSendMessage()">Send</button>
+  </div>
+  <div class="button-row">
+    <button class="btn btn-primary m-2" (click)="handleStartNewSession()">New session</button>
+    <button class="btn btn-warning m-2" (click)="handleSessionEnd()">End Session</button>
+  </div>
+</div>
