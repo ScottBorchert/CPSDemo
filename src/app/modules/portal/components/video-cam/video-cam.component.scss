@@ -1,3 +1,6 @@
+.videocontainer {
+    margin-bottom: 20px;
+}
 .video-container {
     display: flex;
     flex-direction: column;
@@ -30,6 +33,7 @@
     bottom: 0;
     border-radius: 10px;
     overflow: hidden;
+    margin-bottom: 20px;
   }
   
   video {
