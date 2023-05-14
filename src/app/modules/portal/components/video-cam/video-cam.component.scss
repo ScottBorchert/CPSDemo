@@ -1,5 +1,42 @@
-video {
+.video-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .tv-container {
+    width: 80%; /* Adjust the width as desired */
+    padding-top: 56.25%; /* Maintains a 16:9 aspect ratio for the TV frame */
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .tv-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .tv-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  video {
     width: 100%;
-    margin-right: 20px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    filter: brightness(1); /* Add this line to remove the dark overlay */
   }
   

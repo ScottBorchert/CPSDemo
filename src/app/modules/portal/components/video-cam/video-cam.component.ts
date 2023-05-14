@@ -7,8 +7,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class VideoCamComponent implements OnInit {
   @ViewChild('videoElement') videoElement!: ElementRef;
-
-  constructor() { }
+  isRecording: boolean = false;
+  videoAvailable: boolean = false;
+  recordedChunks: any[] = [];
 
   ngOnInit(): void {
     this.startVideo();
@@ -25,39 +26,66 @@ export class VideoCamComponent implements OnInit {
 
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       this.videoElement.nativeElement.srcObject = stream;
+      this.videoElement.nativeElement.play();
     } catch (err) {
       console.error('Error accessing media devices.', err);
     }
   }
+
+  startRecording() {
+    const video: HTMLVideoElement = this.videoElement.nativeElement;
+    this.recordedChunks = [];
+    this.isRecording = true;
+    const mediaStream = video.srcObject as MediaStream | null;
+  
+    if (mediaStream) {
+      const mediaRecorder = new MediaRecorder(mediaStream);
+  
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          this.recordedChunks.push(event.data);
+        }
+      };
+  
+      mediaRecorder.onstop = () => {
+        this.isRecording = false;
+        this.videoAvailable = true;
+        video.srcObject = mediaStream; // Reset the srcObject to keep displaying the camera video
+        video.play(); // Play the video again
+      };
+  
+      mediaRecorder.start();
+    } else {
+      console.error('No media stream available.');
+    }
+  }
+  
+  stopRecording() {
+    const video: HTMLVideoElement = this.videoElement.nativeElement;
+    const mediaStream: MediaStream | null = video.srcObject as MediaStream | null;
+  
+    if (mediaStream) {
+      const mediaTracks = mediaStream.getTracks();
+  
+      mediaTracks.forEach((track: MediaStreamTrack) => {
+        track.stop();
+      });
+      this.startVideo();
+    } else {
+      console.error('No media stream available.');
+    }
+  }
+  
+
+  downloadVideo() {
+    const blob = new Blob(this.recordedChunks, { type: 'video/webm' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    document.body.appendChild(a);
+    a.style.display = 'none';
+    a.href = url;
+    a.download = 'recorded-video.webm';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
 }
-
-/*
-This code is an Angular component written in TypeScript, which initializes and displays a video stream from the user's webcam using the WebRTC (Web Real-Time Communication) API. Let me explain it step by step:
-
-1. Import statements:
-   - `Component`, `OnInit`, `ViewChild`, and `ElementRef` are imported from `@angular/core`. These are used to create Angular components, handle lifecycle hooks, and access DOM elements, respectively.
-
-2. Component decorator:
-   - `@Component` is a decorator that provides metadata for the Angular component.
-   - `selector`: 'app-video-cam' defines the custom HTML tag that will be used to insert this component.
-   - `templateUrl`: The path to the component's HTML template file.
-   - `styleUrls`: An array containing the path to the component's CSS style file.
-
-3. Component class:
-   - `VideoCamComponent` class is defined, which implements the `OnInit` lifecycle hook.
-   - `@ViewChild('videoElement') videoElement!: ElementRef;` is a decorator that queries the DOM for an element with a local reference named "videoElement" and stores the ElementRef instance.
-
-4. Constructor:
-   - The constructor is empty in this case, as there's no need for any dependency injection or additional setup.
-
-5. ngOnInit lifecycle hook:
-   - `ngOnInit` is a lifecycle hook called after the component is initialized. In this case, it calls the `startVideo` method.
-
-6. startVideo method:
-   - This is an asynchronous method that captures the video stream from the user's webcam and assigns it to the videoElement's `srcObject` property.
-   - `constraints` is an object that defines the desired video resolution (1280x720).
-   - `navigator.mediaDevices.getUserMedia(constraints)` is a promise that resolves to a MediaStream object if the user grants access to their webcam.
-   - In case of any error while accessing the media devices, an error message is logged to the console.
-
-This component can be used in an Angular application to display a live video stream from the user's webcam.
- */
