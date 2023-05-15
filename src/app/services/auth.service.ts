@@ -34,21 +34,27 @@ export class AuthService {
     this.router.navigate(['login']);
   }
 
-  login({email, password} : any): Observable<any> {
-    /*
-    const url = `{apiUrl}/usersbycredentials?email=${email}&password=${password}`;
-    const user = this.http.get<User>(url);
-    this.checkUserCredentials(email, password).subscribe(response => {
-      this.userService.setUser(user);
-    }
-    */
-
-    if(email === 'sborchert@gmail.com' && password === 'El3phant') {
-      this.setToken("asdf");
-      return of({ name: 'Scott', email: 'sborchert@foobar.com' });
-    }
-    return throwError(new Error('Failed to login'));
+  login({ email, password }: any): Observable<any> {
+    const url = `${this.apiUrl}/usersbycredentials?email=${email}&password=${password}`;
+  
+    return this.http.get<User>(url).pipe(
+      map((user: User) => {
+        if (user) {
+          console.log(user);
+          this.setToken(user.id.toString()); // Convert the user id to a string
+          this.userService.setUser(user);
+          return user;
+        } else {
+          return throwError(new Error('Failed to login'));
+        }
+      }),
+      catchError((error) => {
+        console.error('Error in login:', error);
+        return throwError(new Error('Failed to login'));
+      })
+    );
   }
+  
 
   checkUserCredentials(email: string, password: string) {
     const url = `https://us-central1-gptlab-api.cloudfunctions.net/app/usersbycredentials?email=${email}&password=${password}`;

@@ -50,3 +50,24 @@
     }
   }
   
+  .user-info {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .user-info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .user-info-label {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  .user-info-value {
+    color: #007bff;
+  }
+  

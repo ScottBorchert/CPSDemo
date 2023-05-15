@@ -26,4 +26,23 @@
       </li>
     </ul>
   </nav>
+
+  
+  <div *ngIf="userService.user$ | async as user" class="user-info">
+    <div class="user-info-row">
+      <span class="user-info-label">Name:</span>
+      <span class="user-info-value">{{ user.name }}</span>
+    </div>
+    <div class="user-info-row">
+      <span class="user-info-label">Username:</span>
+      <span class="user-info-value">{{ user.username }}</span>
+    </div>
+    <div class="user-info-row">
+      <span class="user-info-label">Email:</span>
+      <span class="user-info-value">{{ user.email }}</span>
+    </div>
+  </div>
+  
+    
+  
 </header>
