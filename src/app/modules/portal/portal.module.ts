@@ -14,6 +14,7 @@ import { ChatSessionComponent } from './components/chat-session/chat-session.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { VideoCamComponent } from './components/video-cam/video-cam.component';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -34,7 +35,8 @@ import { VideoCamComponent } from './components/video-cam/video-cam.component';
     PortalRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbCollapseModule
   ]
 })
 export class PortalModule { }

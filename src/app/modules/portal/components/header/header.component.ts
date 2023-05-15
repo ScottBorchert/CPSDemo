@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-
+  isCollapsed = true;
   constructor(private auth: AuthService, private router: Router) { }
   
   ngOnInit(): void { }
@@ -17,5 +17,6 @@ export class HeaderComponent {
     this.auth.logout();
     this.router.navigate(['login']);
   }
+  
 
 }
