@@ -8,7 +8,6 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  isCollapsed = true;
   constructor(private auth: AuthService, private router: Router) { }
   
   ngOnInit(): void { }
@@ -18,5 +17,9 @@ export class HeaderComponent {
     this.router.navigate(['login']);
   }
   
+  isCollapsed = false;
 
+  toggleCollapse() {
+    this.isCollapsed = !this.isCollapsed;
+  }
 }
